@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Budget Tracker</h1>
+
+    <!-- Add Entry Form -->
+    <form action="/add" method="POST">
+        <label>Description:</label>
+        <input type="text" name="description" required>
+
+        <label>Amount:</label>
+        <input type="number" name="amount" step="0.01" required>
+
+        <label>Type:</label>
+        <select name="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+
+        <button type="submit">Add Entry</button>
+    </form>
+
+    <!-- Chart Placeholder -->
+    <canvas id="myChart" width="400" height="200" style="margin-top:20px;"></canvas>
+
+    <!-- Income vs Expense Chart -->
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Income', 'Expenses'],
+                datasets: [{
+                    label: 'Amount',
+                    data: [{{ total_income }}, {{ total_expenses }}],
+                    backgroundColor: ['green', 'red']
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
